@@ -1,0 +1,26 @@
+
+<comment>
+Move this file to the directory containing FCChh_DectEmptyMaster.xml
+</comment>
+<ddeve>
+  <display visLevel="7" loadLevel="4"/>
+  <calodata name="trackerdata" hits="clusters" towerH="50" emax="200"
+	    n_eta="200" eta_min="-5" eta_max="5" 
+	    n_phi="200" phi_min="-pi" phi_max="pi" 
+	    alpha="0.5" rmin="40*mm" dz="3000*mm" color="kCyan"/>
+  <collection name="clusters" hits="PointSet" color="kMagenta" size="0.3" type="20"/>
+  <view name="3D Trackers" type="View3D">
+    <detelement name="GenericTrackerBarrel" load_geo="-1" alpha="0.5"/>
+    <calodata name="trackerdata" />
+  </view>
+  <view name="RhoPhiProjectionWithTrackerData" type="RhoPhiProjection">
+    <detelement name="GenericTrackerBarrel" load_geo="-1" alpha="0.5"/>
+    <calodata name="trackerdata" />
+  </view>
+  <view name="MultiviewWithTrackerData" type="MultiView">
+    <detelement name="GenericTrackerBarrel" load_geo="-1" alpha="0.5"/>
+    <calodata name="trackerdata" />
+  </view>
+  <include ref="./FCChh_DectEmptyMaster.xml"/>
+  <include ref="../..//DetFCChhTrackerSimple/compact/Tracker.xml"/>
+</ddeve>
