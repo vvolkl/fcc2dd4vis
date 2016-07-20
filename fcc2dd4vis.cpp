@@ -6,6 +6,7 @@
 #include "DDG4/Geant4Data.h"
 #include "DDG4/Geant4Hits.h"
 #include "DDEve/DDEveEventData.h" 
+#include "DDEve/Dictionary.h" 
 
 // podio specific includes
 #include "podio/EventStore.h"
@@ -15,14 +16,17 @@
 #include "datamodel/TrackHitCollection.h"
 
 #include "TSystem.h"
+#include "TBrowser.h"
 #include "TFile.h"
 #include "TTree.h"
-#include "TRandom.h"
+#include "TEveManager.h"
+#include "TInterpreter.h"
+#include "TApplication.h"
 
 using DD4hep::Geometry::Position;
 using DD4hep::Simulation::Geant4Tracker;
 
-int main() {
+int main(int argc, char ** argv) {
   auto store = podio::EventStore();
   auto reader = podio::ROOTReader();
 
@@ -31,13 +35,12 @@ int main() {
   reader.openFile(inFilename);
 
   gSystem->Load("libDDG4IO");
+  gSystem->Load("libDDEve");
   std::vector<DD4hep::Simulation::Geant4Tracker::Hit*> hv;
   auto p = new Position(1,2,3);
   
-  // needed for debug only
-  TRandom* random1 = new TRandom;
-  TFile* f = new TFile("test.root", "RECREATE");
-  TTree* T = new TTree("EVENT", "My test tree");
+  TFile* f = new TFile("fccvis_converted.root", "RECREATE");
+  TTree* T = new TTree("EVENT", "Converted event tree");
   T->SetAutoSave(0);
   T->Branch("clusters", &hv);
 
@@ -67,5 +70,10 @@ int main() {
   T->Write();
   delete f;
 
+  char* xmlFilename = argv[1];
+  TApplication app("test_app", &argc, argv);
+  DD4hep::DDEve::run(xmlFilename);
+  app.Run();
+  
   return 0;
 }

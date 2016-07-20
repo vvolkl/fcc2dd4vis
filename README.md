@@ -3,9 +3,14 @@ Usage
 
 Convert a FCCSW data file to DDG4 format:
 
-`./build/fcc2dd4vis`
+```{bash}
+mkdir build
+cd build && cmake ..
+make
+./fcc2dd4vis <path to ddeve xml config file>
+```
 
-Filenames are currently hardcoded, `output.root` for FCCSW (as this is the default name for FCCSW output files) and writes `test.root` for output.
 
-The DDEve viewer can be started with `root -l $DD4hepINSTALL/examples/DDEve/DDEve.C`. In the following dialog, the example xml `DDEve_FCCSW.xml` can be used.
-Event Data  can then be loaded from the gui menu, selecting the output `test.root` from the conversion.
+Filenames are currently hardcoded, `output.root` for FCCSW (as this is the default name for FCCSW output files) and `fccvis_converted.root` for output.
+The DDEve viewer is started by the program. An optional argument is the DDEve configuration xml.
+Event Data  can then loaded from the gui menu, selecting the output `test.root` from the conversion.
