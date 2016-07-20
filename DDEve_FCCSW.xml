@@ -19,5 +19,5 @@
     <calodata name="trackerdata" />
   </view>
   <include ref="./FCChh_DectEmptyMaster.xml"/>
-  <include ref="../..//DetFCChhTrackerSimple/compact/Tracker.xml"/>
+  <include ref="../../DetFCChhTrackerSimple/compact/Tracker.xml"/>
 </ddeve>
