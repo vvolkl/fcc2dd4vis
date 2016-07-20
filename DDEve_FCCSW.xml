@@ -1,7 +1,4 @@
 
-<comment>
-Move this file to the directory containing FCChh_DectEmptyMaster.xml
-</comment>
 <ddeve>
   <display visLevel="7" loadLevel="4"/>
   <calodata name="trackerdata" hits="clusters" towerH="50" emax="200"
