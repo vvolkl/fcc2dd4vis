@@ -16,4 +16,4 @@ include_directories(${DD4hep_INCLUDE_DIRS} ${ROOT_INCLUDE_DIR} ${Geant4_INCLUDE_
 
 
 add_executable(fcc2dd4hit fcc2dd4vis.cpp)
-target_link_libraries(fcc2dd4hit  ${DD4hep_LIBRARIES} ${ROOT_LIBRARIES} ${Geant4_LIBRARIES} ${DD4hep_LIBRARIES}  ${DD4hep_DDG4_LIBRARY} ${podio_LIBRARIES} ${FCCEDM_CMAKE_DIR}/../lib/libdatamodel.so)
+target_link_libraries(fcc2dd4hit  ${DD4hep_LIBRARIES} ${ROOT_LIBRARIES} ${Geant4_LIBRARIES} ${DD4hep_LIBRARIES}  ${DD4hep_DDG4_LIBRARY} ${DD4hep_DDEVE_LIBRARY} ${podio_LIBRARIES} ${FCCEDM_CMAKE_DIR}/../lib/libdatamodel.so)
