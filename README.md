@@ -11,6 +11,6 @@ make
 ```
 
 
-Filenames are currently hardcoded, `output.root` for FCCSW (as this is the default name for FCCSW output files) and `fccvis_converted.root` for output.
+Filenames are currently hardcoded, `output.root` for FCCSW input files (as this is the default name for FCCSW output files) and `fccvis_converted.root` for output.
 The DDEve viewer is started by the program. An optional argument is the DDEve configuration xml.
 Event Data  can then loaded from the gui menu, selecting the output `test.root` from the conversion.
