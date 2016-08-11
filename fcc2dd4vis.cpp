@@ -14,6 +14,8 @@
 
 #include "datamodel/TrackClusterCollection.h"
 #include "datamodel/TrackHitCollection.h"
+#include "datamodel/CaloClusterCollection.h"
+#include "datamodel/CaloHitCollection.h"
 
 #include "TSystem.h"
 #include "TBrowser.h"
@@ -37,12 +39,14 @@ int main(int argc, char ** argv) {
   gSystem->Load("libDDG4IO");
   gSystem->Load("libDDEve");
   std::vector<DD4hep::Simulation::Geant4Tracker::Hit*> hv;
+  std::vector<DD4hep::Simulation::Geant4Calorimeter::Hit*> chv;
   auto p = new Position(1,2,3);
   
   TFile* f = new TFile("fccvis_converted.root", "RECREATE");
   TTree* T = new TTree("EVENT", "Converted event tree");
-  T->SetAutoSave(0);
+  //T->SetAutoSave(0);
   T->Branch("clusters", &hv);
+  T->Branch("caloClusters", &chv);
 
   store.setReader(&reader);
   unsigned nevents= reader.getEntries();
@@ -54,7 +58,9 @@ int main(int argc, char ** argv) {
       for(const auto& cluster : *clustercoll){
         DD4hep::Simulation::Geant4Tracker::Hit* hd = new DD4hep::Simulation::Geant4Tracker::Hit();
         fcc::BareCluster core = cluster.Core();
-        p->SetXYZ(core.position.X, core.position.Y, core.position.Z);
+        p->SetX(core.position.X);
+        p->SetY(core.position.Y);
+        p->SetZ(core.position.Z);
         hd->position = *p;
         hd->energyDeposit = core.Energy;
         // time not used in dd4hep format
@@ -62,8 +68,25 @@ int main(int argc, char ** argv) {
         hv.push_back(hd);
       }
     }
+    const fcc::CaloClusterCollection* caloClustercoll(nullptr);
+    bool caloClusterPresent = store.get("caloClusters", caloClustercoll);
+    if (caloClusterPresent) {
+      for(const auto& caloCluster : *caloClustercoll){
+        DD4hep::Simulation::Geant4Calorimeter::Hit* chd = new DD4hep::Simulation::Geant4Calorimeter::Hit();
+        fcc::BareCluster core = caloCluster.Core();
+        p->SetX(core.position.X);
+        p->SetY(core.position.Y);
+        p->SetZ(core.position.Z);
+        chd->position = *p;
+        chd->energyDeposit = core.Energy;
+        // time not used in dd4hep format
+        // direction (momentum) of hit not provided by edm 
+        chv.push_back(chd);
+      }
+    }
     T->Fill();
     hv.clear();
+    chv.clear();
     store.clear();
     reader.endOfEvent();
   }
