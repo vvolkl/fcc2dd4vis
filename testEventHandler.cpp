@@ -2,7 +2,7 @@
 
 #include "FCCEventHandler.h"
 
-#include "Display.h"
+#include "DDEve/Display.h"
 #include "DDEve/Dictionary.h"
 #include "TInterpreter.h"
 #include "TApplication.h"
@@ -16,8 +16,9 @@ int main(int argc, char ** argv) {
   std::cout << "found " << h->numEvents() << "events ..." << std::endl; 
 
   char* xmlFilename = argv[1];
+  char* eventFilename = argv[2];
   TApplication app("test_app", &argc, argv);
-  DD4hep::EveDisplay(xmlFilename);
+  DD4hep::EveDisplay(xmlFilename, eventFilename);
   app.Run();
 
   return 1;

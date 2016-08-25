@@ -75,9 +75,7 @@ string GenericEventHandler::datasourceName() const {
 
 /// Access to the collection type by name
 EventHandler::CollectionType GenericEventHandler::collectionType(const string& collection) const   {
-  std::cout << "Generic Eventh: " << m_current->collectionType(collection) << "\t" << NO_COLLECTION << std::endl;
   bool i = m_current->hasEvent();
-  std::cout<< "has event2: " << i << std::endl;
     return m_current->collectionType(collection);
   if ( m_current && m_current->hasEvent() )  {
     return m_current->collectionType(collection);
@@ -87,10 +85,8 @@ EventHandler::CollectionType GenericEventHandler::collectionType(const string& c
 
 /// Loop over collection and extract data
 size_t GenericEventHandler::collectionLoop(const string& collection, DDEveHitActor& actor) {
-  std::cout << "GenericEventHandler collectionLoopi " <<collection << std::endl;
     return m_current->collectionLoop(collection,actor);
   if ( m_current && m_current->hasEvent() )  {
-  std::cout << "GenericEventHandler collectionLoop" << std::endl;
 
     return m_current->collectionLoop(collection,actor);
   }

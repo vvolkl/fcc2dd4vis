@@ -390,13 +390,10 @@ void Display::OnNewEvent(EventHandler* handler )   {
       std::cout << len << "\t" << nam << std::endl;
       if ( len > 0 )   {
         EventHandler::CollectionType typ = handler->collectionType(nam);
-        std::cout << "type " << EventHandler::CALO_HIT_COLLECTION << "\t" << typ << std::endl;
         if ( typ == EventHandler::CALO_HIT_COLLECTION ||
              typ == EventHandler::TRACKER_HIT_COLLECTION )  {
-        std::cout << "type " << EventHandler::CALO_HIT_COLLECTION << "\t" << typ << std::endl;
           const DataConfigurations::const_iterator i=m_collectionsConfigs.find(nam);
           for(DataConfigurations::iterator it = m_collectionsConfigs.begin(); it != m_collectionsConfigs.end(); ++it) {
-                cout << it->first << "\n";
           }
         
           if ( i != m_collectionsConfigs.end() )  {
@@ -406,6 +403,7 @@ void Display::OnNewEvent(EventHandler* handler )   {
               PointsetCreator cr(nam,len,cfg);
               handler->collectionLoop((*j).first, cr);
               ImportEvent(cr.element());
+  manager().Redraw3D();
             }
             else if ( cfg.hits == "BoxSet" )  {
               BoxsetCreator cr(nam,len,cfg);

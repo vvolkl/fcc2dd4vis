@@ -19,7 +19,7 @@ add_executable(fcc2dd4hit fcc2dd4vis.cpp)
 target_link_libraries(fcc2dd4hit  ${DD4hep_LIBRARIES} ${ROOT_LIBRARIES} ${Geant4_LIBRARIES} ${DD4hep_LIBRARIES}  ${DD4hep_DDG4_LIBRARY} ${DD4hep_DDEVE_LIBRARY} ${podio_LIBRARIES} ${FCCEDM_CMAKE_DIR}/../lib/libdatamodel.so)
 
 
-add_library(fcceventhandler FCCEventHandler.cpp Display.cpp GenericEventHandler.cpp)
+add_library(fcceventhandler FCCEventHandler.cpp) # Display.cpp GenericEventHandler.cpp)
 target_link_libraries( fcceventhandler  ${DD4hep_LIBRARIES} ${ROOT_LIBRARIES} ${Geant4_LIBRARIES} ${DD4hep_LIBRARIES}  ${DD4hep_DDG4_LIBRARY} ${DD4hep_DDEVE_LIBRARY} ${podio_LIBRARIES} ${FCCEDM_CMAKE_DIR}/../lib/libdatamodel.so)
 
 add_executable(testEventHandler testEventHandler.cpp)

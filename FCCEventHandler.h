@@ -15,25 +15,14 @@
 namespace DD4hep {
 
   class FCCEventHandler : public EventHandler  {
-  public:
-    //typedef std::map<std::string,lcio::LCCollection*> Branches;
-    //typedef const void* (*HitAccessor_t)(const lcio::LCObject*, DDEveHit*);
   protected:
-    /// Reference to data file reader
-    //lcio::LCReader* m_lcReader;
-    //lcio::LCEvent*  m_event;
     podio::EventStore m_podioStore = podio::EventStore();
     podio::ROOTReader m_ROOTReader = podio::ROOTReader();
 
 
     std::string     m_fileName;
-    /// Branch map
-    //Branches        m_branches;
     /// Data collection map
     TypedEventCollections m_data;
-    bool m_hasFile;
-    bool m_hasEvent = 1;
-    int m_event;
   public:
     /// Standard constructor
     FCCEventHandler();
